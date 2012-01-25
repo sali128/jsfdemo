@@ -1,4 +1,4 @@
-package szwedi.web;
+package web;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -16,28 +16,29 @@ import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import szwedi.project.*;
-import szwedi.services.*;
+import project.*;
+
+import services.*;
 
 
 @SessionScoped
-@Named("personBean2")
+@Named("personBean")
 public class PersonFormBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	Person person = new Person(null, null);
+	Client person = new Client(null, null);
 
-	ListDataModel<Person> persons = new ListDataModel<Person>();
+	ListDataModel<Client> persons = new ListDataModel<Client>();
 
 	@Inject
 	PersonDBManager personDBManager = new PersonDBManager();
 
-	public Person getPerson() {
+	public Client getPerson() {
 		return person;
 	}
 
-	public void setPerson(Person person) {
+	public void setPerson(Client person) {
 		this.person = person;
 	}
 	
@@ -46,14 +47,14 @@ public class PersonFormBean implements Serializable {
 		return "showPersons";
 	}
 		
-	public ListDataModel<Person> getAllPersons() {
+	public ListDataModel<Client> getAllPersons() {
 		persons.setWrappedData(personDBManager.getAllPersons());
 		return persons;
 	}
 
 
 	public void deletePerson() {
-		Person personToDelete = persons.getRowData();
+		Client personToDelete = persons.getRowData();
 		personDBManager.deletePerson(personDBManager.findPersonByName(personToDelete.getName()));
 	}
 

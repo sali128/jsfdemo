@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+	<ui:define name="content">
+
+		<h:form id="movieForm">
+            
+			<h:panelGrid columns="2">
+
+				<h:outputText value="#{msg.movieNameLabel}" />
+				<h:inputText id="name" value="#{movieBean.movie.name}" required="#{true}">
+ 					<f:validator validatorId="movieValidator" /> 
+				</h:inputText>
+
+				<h:outputText value="#{msg.movieMovieTypeLabel}" />
+				<h:selectOneMenu id="movieTypeString" value="#{movieBean.movie.movieTypeString}">
+				  <f:selectItem id="Horror" itemLabel="Horror" itemValue="Horror" />
+				  <f:selectItem id="Comedy" itemLabel="Comedy" itemValue="Comedy" />
+				  <f:selectItem id="Thriller" itemLabel="Thriller" itemValue="Thriller" />
+				 
+				</h:selectOneMenu>
+
+
+				
+				<h:outputText value="#{msg.movieReleaseYearLabel}" />
+				<h:inputText id="releaseYear" value="#{movieBean.movie.releaseYear}" required="#{true}" />
+
+				<h:outputText value="#{msg.moviePriceLabel}" />
+				<h:inputText id="price" value="#{movieBean.movie.price}" required="#{true}" />
+				
+
+
+			</h:panelGrid>
+			
+			<h:commandButton value="#{msg.movieFormOKButton}"
+				action="#{movieBean.addMovie}" />
+
+
+			<h:panelGrid>
+				<h:messages id="messages" showDetail="#{true}"
+					showSummary="#{false}" />
+			</h:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
